@@ -15,3 +15,13 @@ A versão completa da arquitetura enterprise (DevOps + QA Engineering) está em:
 - `k8s/overlays/*`: configuração base por ambiente (DEV/QA/UAT).
 - `.github/workflows/deploy-qa.yml`: deploy automático em QA a partir de `develop`.
 - `.github/workflows/deploy-uat.yml`: deploy manual/aprovado em UAT.
+
+
+## Segurança de segredos (GitGuardian)
+
+Foi removida a credencial hardcoded do `docker-compose.dev.yml`.
+
+Passos recomendados:
+- Copie `.env.example` para `.env` e defina credenciais locais.
+- Não versione `.env` (já coberto no `.gitignore`).
+- Faça rotação/revogação da credencial previamente exposta.
