@@ -1,0 +1,33 @@
+name: Deploy QA
+
+on:
+  push:
+    branches: ["develop"]
+
+jobs:
+  test-and-deploy-qa:
+    runs-on: ubuntu-latest
+    environment: qa
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run tests
+        run: npm test
+
+      - name: Build image
+        run: echo "Build container image here"
+
+      - name: Deploy to QA
+        run: |
+          echo "kubectl apply -f k8s/namespaces/qa.yaml"
+          echo "kubectl apply -k k8s/overlays/qa"
